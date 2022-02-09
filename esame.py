@@ -42,6 +42,7 @@ def compute_avg_monthly_difference(time_series, first_year_str, last_year_str):
     # dichiaro la variabile monthly_data e chiamo la funzione transform_to_list_of_monthly_data che mi permette di creare una lista di liste in cui ogni lista contiene i dati di un mese specifico per ogni anno considerato
     monthly_data= transform_to_list_of_monthly_data(period_series)
     
+    print(f'monthly_data:{monthly_data}')
     # calcolo dell'incremento medio con la funzione average_for_month per ogni dato all'interno della mia lista 
     for data in monthly_data:
       
@@ -66,7 +67,7 @@ def transform_to_list_of_monthly_data(period_series):
     
     # per ogni mese in un range di 12 (mesi presenti in un anno) aggiungo alla lista precedentemente creata i dati per mese ottenuti con la funzione get_data_for_month
     for i in range(n_of_months):
-        monthly_data.append(get_data_for_month(time_series, i))
+        monthly_data.append(get_data_for_month(period_series, i))
     return monthly_data
 
 #================================================
@@ -85,10 +86,15 @@ def average_for_month(month_series):
     # per ogni dato nella lista dei mesi calcolo la differenza tra elementi consecutivi facendo attenzione a fare la sottrazione con minuendo appartenente all'anno successivo di quello del sottraendo
     # se il valore è -1 salta il calcolo dell'incremento
     deltas = [x - month_series[i - 1] for i, x in enumerate(month_series) if i > 0 and x != -1 and  month_series[i - 1] !=-1 ]
-    
+    print(f'deltas:{deltas}')
     # restituisce il risultato che cercavamo dato dalla differenza tra le differenze tra i dati di mesi di anni consecutivi calcolate prima, poi sommati e divisi per il numero di somme fatte 
     # ho arrotondato il risultato con due cifre decimali
-    return round(sum(deltas) / len(deltas), 2)
+    if len(deltas) != 0:
+        
+        return round(sum(deltas) / len(deltas), 2)
+    
+    else:
+        return 0
 
    
 #====================================================
