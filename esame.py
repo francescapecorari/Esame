@@ -252,8 +252,7 @@ class CSVTimeSeriesFile(CSVFile):
                             numerical_row.append(-1)
 
                             
-                    except ExamException('Errore in conversione del valore a numerico'):
-                        pass
+                    except:
                         # inserisco -1 per identificare le righe con valore non valido
                         numerical_row.append(-1)
                         
