@@ -241,18 +241,19 @@ class CSVTimeSeriesFile(CSVFile):
                 else:
                     # converto a int tutti gli altri. Ma se fallisco, stampo l'errore e rompo il ciclo (e poi saltero' la riga).
                     
-                    #try:
+                    try:
                         # controllo che il valore da inserire nella lista sia positivo altrimenti alzo un'eccezione che verrà gestita nell' except
-                    element_value = int(element)
-                    if element_value >=0:
+                        element_value = int(element)
+                        if element_value >=0:
 
-                        numerical_row.append(element_value)
-                    else:
+                            numerical_row.append(element_value)
+                        else:
+                            
+                            numerical_row.append(-1)
 
-                        #raise ExamException ('Valore negativo')
-
-                    #except ExamException('Errore in conversione del valore a numerico'):
-                        
+                            
+                    except ExamException('Errore in conversione del valore a numerico'):
+                        pass
                         # inserisco -1 per identificare le righe con valore non valido
                         numerical_row.append(-1)
                         
