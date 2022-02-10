@@ -34,7 +34,7 @@ def compute_avg_monthly_difference(time_series, first_year_str, last_year_str):
     # creo una lista che contenga tutti i dati degli anni considerati
     period_series = time_series[cell_index_first_year: (cell_index_last_year)]
 
-    print(f'lista_anni: "{period_series}"')
+    #print(f'lista_anni: "{period_series}"')
     
     # creo la lista vuota in cui caricherò i risultati delli incremento medio per ogni mese
     avg_result= []
@@ -42,13 +42,14 @@ def compute_avg_monthly_difference(time_series, first_year_str, last_year_str):
     # dichiaro la variabile monthly_data e chiamo la funzione transform_to_list_of_monthly_data che mi permette di creare una lista di liste in cui ogni lista contiene i dati di un mese specifico per ogni anno considerato
     monthly_data= transform_to_list_of_monthly_data(period_series)
     
-    print(f'monthly_data:{monthly_data}')
+    #print(f'monthly_data:{monthly_data}')
+
     # calcolo dell'incremento medio con la funzione average_for_month per ogni dato all'interno della mia lista 
     for data in monthly_data:
       
        avg_result.append(average_for_month(data))
 
-    print(f'avg_result: {avg_result}')
+    #print(f'avg_result: {avg_result}')
     
     # la funzione restituisce il risultato del calcolo dell'incremento medio
     return avg_result
@@ -86,7 +87,9 @@ def average_for_month(month_series):
     # per ogni dato nella lista dei mesi calcolo la differenza tra elementi consecutivi facendo attenzione a fare la sottrazione con minuendo appartenente all'anno successivo di quello del sottraendo
     # se il valore è -1 salta il calcolo dell'incremento
     deltas = [x - month_series[i - 1] for i, x in enumerate(month_series) if i > 0 and x != -1 and  month_series[i - 1] !=-1 ]
-    print(f'deltas:{deltas}')
+    
+    #print(f'deltas:{deltas}')
+
     # restituisce il risultato che cercavamo dato dalla differenza tra le differenze tra i dati di mesi di anni consecutivi calcolate prima, poi sommati e divisi per il numero di somme fatte 
     # ho arrotondato il risultato con due cifre decimali
     if len(deltas) != 0:
@@ -271,23 +274,20 @@ class CSVTimeSeriesFile(CSVFile):
        
 
 
-#==============================
-#  Corpo del programma
-#==============================
+#=============================================
+#  Corpo del programma sotto forma di commenti
+#=============================================
 
-mio_file = CSVFile(name='data.csv')
-print('Nome del file: "{}"\n'.format(mio_file.name))
-print('Dati contenuti nel file: "{}"\n'.format(mio_file.get_data()))
+#mio_file = CSVFile(name='data.csv')
+#print('Nome del file: "{}"\n'.format(mio_file.name))
+#print('Dati contenuti nel file: "{}"\n'.format(mio_file.get_data()))
 
-time_series_file = CSVTimeSeriesFile(name='data.csv')
-time_series = time_series_file.get_data()
-print('Nome del file: "{}"\n'.format(time_series_file.name))
-print('Dati contenuti nel file: "{}"\n'.format(time_series))
+#time_series_file = CSVTimeSeriesFile(name='data.csv')
+#time_series = time_series_file.get_data()
+#print('Nome del file: "{}"\n'.format(time_series_file.name))
+#print('Dati contenuti nel file: "{}"\n'.format(time_series))
 
- 
-
-
-compute_avg_monthly_difference(time_series, "1959", "1960")
+#print(f'result: {compute_avg_monthly_difference(time_series, "1959", "1960")}')
 
 
 
